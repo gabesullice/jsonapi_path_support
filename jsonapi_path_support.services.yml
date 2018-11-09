@@ -1,0 +1,12 @@
+services:
+  jsonapi_path_support.request_forwarder:
+    class: Drupal\jsonapi_path_support\Controller\Forwarder
+    arguments:
+      - '@http_kernel'
+      - '@jsonapi.resource_type.repository'
+  jsonapi_path_support.request_validator:
+    class: Drupal\jsonapi_path_support\EventSubscriber\JsonApiRequestValidatorDecorator
+    decorates: jsonapi.custom_query_parameter_names_validator.subscriber
+  jsonapi_path_support.route_filter:
+    class: Drupal\jsonapi_path_support\Routing\RouteFilter
+    tags: [{ name: route_filter }]
